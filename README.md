@@ -2,7 +2,7 @@
 
 ## Backend Module 1 (Auth + Core Skeleton)
 
-The backend skeleton follows a clean architecture-inspired layout under `/home/runner/work/LLM-Based-Chatbot-Using-RAG/LLM-Based-Chatbot-Using-RAG/backend/app`.
+The backend skeleton follows a clean architecture-inspired layout under `backend/app`.
 
 ### Included in this module
 - FastAPI app bootstrap with versioned routing (`/api/v1`)
@@ -14,7 +14,7 @@ The backend skeleton follows a clean architecture-inspired layout under `/home/r
 
 ### Quick start
 ```bash
-cd /home/runner/work/LLM-Based-Chatbot-Using-RAG/LLM-Based-Chatbot-Using-RAG/backend
+cd backend
 cp .env.example .env
 python -m pip install -r requirements.txt
 uvicorn app.main:app --reload
