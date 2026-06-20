@@ -5,6 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    # `.env` is used when running from `backend/`; `backend/.env` supports running from repo root.
     model_config = SettingsConfigDict(env_file=(".env", "backend/.env"), env_file_encoding="utf-8", case_sensitive=True)
 
     APP_NAME: str = "LLM RAG Chatbot API"

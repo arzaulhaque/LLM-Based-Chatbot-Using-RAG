@@ -10,7 +10,7 @@ class SQLAlchemyUserRepository(UserRepository):
         self.db = db
 
     def create(self, *, email: str, full_name: str, password_hash: str) -> User:
-        normalized_email = email.strip().lower()
+        normalized_email = self._normalize_email(email)
         db_user = UserModel(email=normalized_email, full_name=full_name, password_hash=password_hash)
         self.db.add(db_user)
         self.db.commit()
@@ -18,7 +18,7 @@ class SQLAlchemyUserRepository(UserRepository):
         return self._to_entity(db_user)
 
     def get_by_email(self, email: str) -> User | None:
-        normalized_email = email.strip().lower()
+        normalized_email = self._normalize_email(email)
         db_user = self.db.query(UserModel).filter(UserModel.email == normalized_email).first()
         if db_user is None:
             return None
@@ -34,3 +34,7 @@ class SQLAlchemyUserRepository(UserRepository):
             created_at=model.created_at,
             updated_at=model.updated_at,
         )
+
+    @staticmethod
+    def _normalize_email(email: str) -> str:
+        return email.strip().lower()

@@ -30,5 +30,5 @@ def me(current_user: UserResponse = Depends(get_current_active_user)) -> UserRes
 
 
 @router.post("/logout", response_model=LogoutResponse)
-def logout() -> LogoutResponse:
+def logout(_: UserResponse = Depends(get_current_active_user)) -> LogoutResponse:
     return LogoutResponse(message="Logout successful")
