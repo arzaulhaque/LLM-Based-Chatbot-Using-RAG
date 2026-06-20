@@ -10,15 +10,15 @@ class Base(DeclarativeBase):
     pass
 
 
-def get_connect_args(database_url: str) -> dict[str, bool] | None:
+def get_connect_args(database_url: str) -> dict[str, bool]:
     if database_url.startswith("sqlite"):
         return {"check_same_thread": False}
-    return None
+    return {}
 
 
 engine = create_engine(
     settings.SQLALCHEMY_DATABASE_URL,
-    connect_args=get_connect_args(settings.SQLALCHEMY_DATABASE_URL) or {},
+    connect_args=get_connect_args(settings.SQLALCHEMY_DATABASE_URL),
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, class_=Session)
 

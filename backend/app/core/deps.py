@@ -24,7 +24,7 @@ def get_login_use_case(repository: SQLAlchemyUserRepository = Depends(get_user_r
     return LoginUserUseCase(repository)
 
 
-def get_current_active_user(
+def get_current_user(
     token: str = Depends(oauth2_scheme), repository: SQLAlchemyUserRepository = Depends(get_user_repository)
 ) -> UserResponse:
     credentials_exception = HTTPException(

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status
 
 from app.application.use_cases.auth.login_user import LoginUserUseCase
 from app.application.use_cases.auth.register_user import RegisterUserUseCase
-from app.core.deps import get_current_active_user, get_login_use_case, get_register_use_case
+from app.core.deps import get_current_user, get_login_use_case, get_register_use_case
 from app.schemas.auth import (
     AuthToken,
     LoginRequest,
@@ -25,10 +25,10 @@ def login(payload: LoginRequest, use_case: LoginUserUseCase = Depends(get_login_
 
 
 @router.get("/me", response_model=UserResponse)
-def me(current_user: UserResponse = Depends(get_current_active_user)) -> UserResponse:
+def me(current_user: UserResponse = Depends(get_current_user)) -> UserResponse:
     return current_user
 
 
 @router.post("/logout", response_model=LogoutResponse)
-def logout(_: UserResponse = Depends(get_current_active_user)) -> LogoutResponse:
+def logout(_: UserResponse = Depends(get_current_user)) -> LogoutResponse:
     return LogoutResponse(message="Logout successful")

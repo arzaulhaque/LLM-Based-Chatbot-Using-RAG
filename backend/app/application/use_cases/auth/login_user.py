@@ -4,6 +4,7 @@ from app.core.security import create_access_token, verify_password
 from app.domain.repositories.user_repository import UserRepository
 from app.schemas.auth import AuthToken, LoginRequest
 
+# Used when a user is missing to keep password verification timing consistent.
 DUMMY_PASSWORD_HASH = "$2b$12$C6UzMDM.H6dfI/f/IKcEeO9Kf2kD4R5nCTpuj/zy4C+OGpamoQ9G2"
 
 
