@@ -25,3 +25,5 @@ uvicorn app.main:app --reload
 - `POST /api/v1/auth/login`
 - `GET /api/v1/auth/me`
 - `POST /api/v1/auth/logout`
+
+> `logout` is currently a placeholder response. Token revocation/blacklisting should be added in a later module.

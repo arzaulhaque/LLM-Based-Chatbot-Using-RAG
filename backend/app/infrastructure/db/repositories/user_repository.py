@@ -10,14 +10,16 @@ class SQLAlchemyUserRepository(UserRepository):
         self.db = db
 
     def create(self, *, email: str, full_name: str, password_hash: str) -> User:
-        db_user = UserModel(email=email, full_name=full_name, password_hash=password_hash)
+        normalized_email = email.strip().lower()
+        db_user = UserModel(email=normalized_email, full_name=full_name, password_hash=password_hash)
         self.db.add(db_user)
         self.db.commit()
         self.db.refresh(db_user)
         return self._to_entity(db_user)
 
     def get_by_email(self, email: str) -> User | None:
-        db_user = self.db.query(UserModel).filter(UserModel.email == email).first()
+        normalized_email = email.strip().lower()
+        db_user = self.db.query(UserModel).filter(UserModel.email == normalized_email).first()
         if db_user is None:
             return None
         return self._to_entity(db_user)
