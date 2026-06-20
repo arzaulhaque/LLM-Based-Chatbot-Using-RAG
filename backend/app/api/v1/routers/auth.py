@@ -31,4 +31,4 @@ def me(current_user: UserResponse = Depends(get_current_active_user)) -> UserRes
 
 @router.post("/logout", response_model=LogoutResponse)
 def logout() -> LogoutResponse:
-    return LogoutResponse(message="Logout successful. Token revocation can be added with blacklist/refresh flow.")
+    return LogoutResponse(message="Logout successful")
